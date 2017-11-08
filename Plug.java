@@ -5,11 +5,11 @@ public class Plug {
         this.end2 = end2;
     }
 
-    public char getEnd1() {
+    char getEnd1() {
         return end1;
     }
 
-    public char getEnd2() {
+    char getEnd2() {
         return end2;
     }
 
@@ -35,14 +35,13 @@ public class Plug {
         return letterOut;
     }
 
-    // Check to see if either end of this plug clashes with that of another plug
+    // Check to see if either end of this plug clashes with that of another plug.
     boolean clashesWith(Plug plugin){
-        char[] pluginEnds = {plugin.getEnd1(), plugin.getEnd2()};
-        for(char end : pluginEnds){
-            if(end == end1 || end == end2){
-                return true;
-            }
-        }
-        return false;
+        return hasEnd(plugin.getEnd1()) || hasEnd(plugin.getEnd2());
+    }
+
+    //Check if either end of this plug equals a given character
+    boolean hasEnd(char end){
+        return end1 == end || end2 == end;
     }
 }

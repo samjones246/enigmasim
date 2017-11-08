@@ -16,6 +16,21 @@ public class Tester {
         System.out.println("----Plugboard Test----");
         System.out.println("Creating Plugboard...");
         Plugboard plugboard = new Plugboard();
-        System.out.println("");
+        System.out.println("Adding plug with ends 'T' and 'F' to plugboard...");
+        System.out.println("Result: " + plugboard.addPlug('T', 'F'));
+
+        System.out.println("Adding plug with ends 'Q' and 'P' to plugboard...");
+        System.out.println("Result: " + plugboard.addPlug('Q', 'P'));
+
+        System.out.println("Adding plug with ends 'A' and 'L' to plugboard...");
+        System.out.println("Result: " + plugboard.addPlug('A', 'L'));
+
+        System.out.println("Adding plug with ends 'T' and 'R' to plugboard...");
+        System.out.println("Result: " + plugboard.addPlug('T', 'R'));
+        System.out.println("Numplugs = " +plugboard.getNumPlugs());
+
+        System.out.println("Encoding 'P' using plugboard...");
+        System.out.println("Result: " + plugboard.substitute('P'));
+
     }
 }
