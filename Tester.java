@@ -1,7 +1,7 @@
 // This is a tester class used for debugging purposes only
 public class Tester {
     public static void main(String[] args){
-        System.out.println("----Plug method test----");
+    /*    System.out.println("----Plug method test----");
         System.out.println("Creating plugAB, ends A and B...");
         Plug plugAB = new Plug('A', 'B');
         System.out.println("Creating plugBC, ends B and C...");
@@ -31,6 +31,33 @@ public class Tester {
 
         System.out.println("Encoding 'P' using plugboard...");
         System.out.println("Result: " + plugboard.substitute('P'));
+        */
+        System.out.println("----Reflector Test----");
+        System.out.println("Creating Reflectors...");
+        Reflector rI = new Reflector();
+        Reflector rII = new Reflector();
+        try {
+            rI.initialise("ReflectorI");
+            rII.initialise("ReflectorII");
+        }catch(Exception e){
+            System.err.println(e);
+        }
+        System.out.println("Substituting 3 with rI...");
+        System.out.println("Expected Output: 7");
+        System.out.print("Actual output: ");
+        try {
+            System.out.println(rI.substitute(3));
+        }catch (Exception e){
+            System.err.println(e);
+        }
+        System.out.println("Substituting 3 with rII...");
+        System.out.println("Expected Output: 9");
+        System.out.print("Actual output: ");
+        try {
+            System.out.println(rII.substitute(3));
+        }catch (Exception e){
+            System.err.println(e);
+        }
 
     }
 }

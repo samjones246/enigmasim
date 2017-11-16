@@ -18,7 +18,11 @@ public class Reflector extends Rotor {
     }
 
     @Override
-    public int substitute(int original) {
-        return mapping[original];
+    public int substitute(int original) throws Exception{
+        if(mapping == null){
+            throw new Exception("Reflector has not yet been initialised!");
+        }else {
+            return mapping[original];
+        }
     }
 }

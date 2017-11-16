@@ -15,5 +15,5 @@ public abstract class Rotor {
     }
 
     public abstract void initialise(String name) throws Exception;
-    public abstract int substitute(int original);
+    public abstract int substitute(int original) throws Exception;
 }
