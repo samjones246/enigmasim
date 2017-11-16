@@ -14,6 +14,6 @@ public abstract class Rotor {
         this.position = position;
     }
 
-    public abstract void initialise(String name);
-    public abstract void substitute(String name);
+    public abstract void initialise(String name) throws Exception;
+    public abstract int substitute(int original);
 }

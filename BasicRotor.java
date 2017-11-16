@@ -8,7 +8,7 @@ public class BasicRotor extends Rotor {
     }
 
     @Override
-    public void substitute(String name) {
-
+    public int substitute(int original) {
+        return (0);
     }
 }
