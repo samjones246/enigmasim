@@ -1,6 +1,6 @@
 // This is a tester class used for debugging purposes only
 public class Tester {
-    public static void main(String[] args){
+    public static void main(String[] args) throws Exception{
     /*    System.out.println("----Plug method test----");
         System.out.println("Creating plugAB, ends A and B...");
         Plug plugAB = new Plug('A', 'B');
@@ -58,6 +58,18 @@ public class Tester {
         }catch (Exception e){
             System.err.println(e);
         }
-
+        System.out.println("----Rotor Test----");
+        System.out.println("Creating BasicRotor - mapping: I, position: 0");
+        BasicRotor brI = new BasicRotor("I");
+        System.out.println("Substituting 3...");
+        System.out.println("Expected Result: 5");
+        System.out.println("Actual Result: " + brI.substitute(3));
+        System.out.println("Rotating 5 times...");
+        for(int i=0;i<5;i++){
+            brI.rotate();
+        }
+        System.out.println("Substituting 3...");
+        System.out.println("Expected Result: 7");
+        System.out.println("Actual Result: " + brI.substitute(3));
     }
 }

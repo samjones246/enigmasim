@@ -3,7 +3,7 @@
  */
 public abstract class Rotor {
     String name;
-    int position, ROTORSIZE = 26;
+    int position = 0, ROTORSIZE = 26;
     int[] mapping;
 
     public int getPosition() {
