@@ -89,14 +89,25 @@ public class EMInterface {
         enigmaMachine.reflector.initialise(br.readLine());
     }
     public void start() throws Exception{
-        System.out.println("Enter string to pass to Enigma Machine: ");
-        char[] chars = br.readLine().toCharArray();
-        System.out.println("Encoded/Decoded message: ");
-        for(int i=0;i<chars.length;i++){
-            System.out.print(enigmaMachine.encodeLetter(chars[i]));
+        char[] chars;
+        System.out.println("---Start---");
+        System.out.println("1 - Enter string manually");
+        System.out.println("2 - Use string from file");
+        System.out.println("3 - Back");
+        String input = br.readLine();
+        switch (input){
+            case "1":
+                System.out.println("Enter string to pass to Enigma Machine: ");
+                chars = br.readLine().toCharArray();
+                System.out.println("Encoded/Decoded message: ");
+                for(int i=0;i<chars.length;i++){
+                    System.out.print(enigmaMachine.encodeLetter(chars[i]));
+                }
+                System.out.println("\nPress enter to continue");
+                br.readLine();
+                break;
+            case "2":
+                break;
         }
-        System.out.println("\nPress enter to continue");
-        br.readLine();
     }
-
 }
