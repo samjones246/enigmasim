@@ -40,10 +40,11 @@ public class EnigmaMachine {
     }
 
     public char encodeLetter(char original){
-        HashMap<String, Integer> convert = new HashMap<String, Integer>(){};
+	char[] alphabet = new char[]{'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
         char newChar = original;
         int temp;
-        newChar = plugboard.substitute(original);
+        newChar = plugboard.substitute(newChar);
+	rotors[0].substitute(alphabet.indexOf(newChar);
 
     }
 }
