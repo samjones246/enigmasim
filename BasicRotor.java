@@ -34,9 +34,28 @@ public class BasicRotor extends Rotor {
     public int substitute(int original) {
         int altered = original - position;
         if(altered < 0){
-            altered = 26 + altered;
+            altered = ROTORSIZE + altered;
         }
-        return (mapping[altered] + position);
+        altered = mapping[altered] + position;
+        if(altered>=ROTORSIZE){
+            altered = altered-ROTORSIZE;
+        }
+        return (altered);
+    }
+    public int substituteBack(int original){
+        int[] inverseMapping = new int[ROTORSIZE];
+        for(int i=0;i<ROTORSIZE;i++){
+            inverseMapping[mapping[i]] = i;
+        }
+        int altered = original - position;
+        if(altered < 0){
+            altered = ROTORSIZE + altered;
+        }
+        altered = inverseMapping[altered] + position;
+        if(altered>=ROTORSIZE){
+            altered = altered-ROTORSIZE;
+        }
+        return (altered);
     }
 
     public void rotate(){

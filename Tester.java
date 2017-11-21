@@ -1,6 +1,6 @@
 // This is a tester class used for debugging purposes only
 public class Tester {
-    public static void main(String[] args) throws Exception{
+    public void test() throws Exception{
     /*    System.out.println("----Plug method test----");
         System.out.println("Creating plugAB, ends A and B...");
         Plug plugAB = new Plug('A', 'B');
