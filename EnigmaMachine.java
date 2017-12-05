@@ -60,7 +60,11 @@ public class EnigmaMachine {
         }
         newChar = alphabet[numrep];
         newChar = plugboard.substitute(newChar);
-        rotors[0].rotate();
+        if (rotors[0] instanceof TurnoverRotor) {
+            ((TurnoverRotor)rotors[0]).rotate();
+        }else{
+            rotors[0].rotate();
+        }
         return newChar;
     }
 

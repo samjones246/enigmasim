@@ -1,6 +1,5 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.util.ArrayList;
 
 /**
  * Handles user interaction with the enigma machine by allowing them to change settings
@@ -10,6 +9,7 @@ public class EMInterface {
     BufferedReader reader;
     EnigmaMachine enigmaMachine;
     Reflector reflector;
+    int[] startPositions = new int[3];
 
     /**
      * Class constructor which instantiates EnigmaMachine components and then starts the menu
@@ -26,6 +26,16 @@ public class EMInterface {
             enigmaMachine.addRotor(new BasicRotor("I"), 2);
         }catch (Exception e){
             System.err.println(e);
+        }
+        try {
+            loadSettings();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        for(int i=0;i<2;i++) {
+            if (enigmaMachine.rotors[i] instanceof TurnoverRotor) {
+                ((TurnoverRotor) enigmaMachine.rotors[i]).setNextRotor(enigmaMachine.rotors[i + 1]);
+            }
         }
         menu();
     }
@@ -45,6 +55,7 @@ public class EMInterface {
             System.out.println("3 - Reflector Type");
             System.out.println("4 - Start");
             System.out.println("5 - Quit");
+            System.out.println("6 - Bombe Challenges");
             System.out.print("> ");
             String input = userInput();
             switch (input) {
@@ -61,6 +72,7 @@ public class EMInterface {
                     start();
                     break;
                 case "5":
+                    quit();
                     run = false;
                     break;
             }
@@ -104,26 +116,39 @@ public class EMInterface {
     /**
      * The submenu for adjusting rotor settings
      * Allows user to choose which of the three rotors they would like to adjust and then lets them set the type
-     * and position of that rotor.
+     * and position of that rotor. Also allows the user to specify if the rotor is a turnover rotor, and updates the
+     * nextRotor property of any turnover rotors after changes have been made.
      */
     public void rotors(){
         clearScreen();
-        int i;
+        int slot;
         System.out.println("---Rotor Settings---");
         System.out.print("Rotor to adjust (0 - 2): ");
-        i = Integer.parseInt(userInput());
+        slot = Integer.parseInt(userInput());
         System.out.print("Set type (I, II, III, IV or V): ");
         String type = userInput();
+        System.out.print("Is this a Turnover Rotor? (Y/N): ");
+        String turnOver = userInput();
         try {
-            enigmaMachine.addRotor(new BasicRotor(type), i);
+            if (turnOver.toUpperCase().equals("Y")) {
+                enigmaMachine.addRotor(new TurnoverRotor(type), slot);
+            } else {
+                enigmaMachine.addRotor(new BasicRotor(type), slot);
+            }
         }catch (Exception e){
             System.err.println(e);
         }
         System.out.print("Set position (0-25): ");
         try {
-            enigmaMachine.rotors[i].setPosition(Integer.parseInt(userInput()));
+            startPositions[slot] = Integer.parseInt(userInput());
+            enigmaMachine.rotors[slot].setPosition(startPositions[slot]);
         }catch (Exception e){
             System.err.println(e);
+        }
+        for(int i=0;i<2;i++) {
+            if (enigmaMachine.rotors[i] instanceof TurnoverRotor) {
+                ((TurnoverRotor) enigmaMachine.rotors[i]).setNextRotor(enigmaMachine.rotors[i + 1]);
+            }
         }
     }
 
@@ -180,6 +205,13 @@ public class EMInterface {
             default:
                 break;
         }
+        for(int i = 0;i<3;i++){
+            try {
+                enigmaMachine.rotors[i].setPosition(startPositions[i]);
+            }catch (Exception e){
+                System.err.println(e);
+            }
+        }
     }
     String userInput(){
         String input=null;
@@ -189,5 +221,40 @@ public class EMInterface {
             System.err.println(e);
         }
         return input;
+    }
+    void quit(){
+        try {
+            PrintStream writer = new PrintStream("settings.txt");
+            for(BasicRotor rotor:enigmaMachine.rotors){
+                writer.println(rotor.name + "," + rotor.position + "," + (rotor instanceof TurnoverRotor));
+            }
+            writer.println(reflector.name);
+            for (Plug plug : enigmaMachine.plugboard.getPlugs()){
+                if(plug!=null) {
+                    writer.println(plug.getEnd1() + plug.getEnd2());
+                }
+            }
+        }catch (FileNotFoundException e){
+            System.err.println("Settings file not found.");
+        }
+    }
+    void loadSettings() throws Exception{
+        BufferedReader reader = new BufferedReader(new FileReader("settings.txt"));
+        reader.mark(1024);
+        for (int i=0;i<3;i++){
+            String[] line = reader.readLine().split(",");
+            if(line[2].equals("true")){
+                enigmaMachine.addRotor(new TurnoverRotor(line[0]), i);
+            }else{
+                enigmaMachine.addRotor(new BasicRotor(line[0]), i);
+            }
+            enigmaMachine.getRotor(i).setPosition(Integer.parseInt(line[1]));
+        }
+        enigmaMachine.getReflector().initialise(reader.readLine());
+        String line;
+        while((line=reader.readLine())!=null){
+            char[] ends = line.toCharArray();
+            enigmaMachine.addPlug(ends[0], ends[1]);
+        }
     }
 }

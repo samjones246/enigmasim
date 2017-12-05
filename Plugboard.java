@@ -44,5 +44,7 @@ public class Plugboard {
         }
         return output;
     }
-
+    public Plug[] getPlugs() {
+        return plugs;
+    }
 }
