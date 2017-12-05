@@ -1,6 +1,4 @@
 import java.io.*;
-import java.util.ArrayList;
-
 /**
  * Handles user interaction with the enigma machine by allowing them to change settings
  * through a command line interface.

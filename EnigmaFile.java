@@ -1,5 +1,4 @@
 import java.io.*;
-
 /**
  * This class is used for encoding/decoding text from a file.
  */

@@ -1,7 +1,15 @@
 /**
- * Created by sj2g17 on 16/11/17.
+ * Class to model the reflector component of the Enigma Machine
+ * The reflector is a type of Rotor so extends the Rotor class. It has two possible mappings and must be initialised
+ * before use.
  */
 public class Reflector extends Rotor {
+
+    /**
+     * Sets the mapping of the reflector based on the specified type.
+     * @param type The reflector type.
+     * @throws Exception Thrown if the reflector type is not ReflectorI or ReflectorII
+     */
     @Override
     public void initialise(String type) throws Exception {
         this.name = type;
@@ -17,6 +25,12 @@ public class Reflector extends Rotor {
         }
     }
 
+    /**
+     * Uses this reflector to substitute an integer representation of a character
+     * @param original The character to be substituted, in integer form.
+     * @return The substituted character
+     * @throws Exception Thrown if the integer given is not in the range 0-25
+     */
     @Override
     public int substitute(int original) throws Exception{
         if(mapping == null){
