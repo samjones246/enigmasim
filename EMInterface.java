@@ -256,6 +256,10 @@ public class EMInterface {
         }
         return input;
     }
+
+    /**
+     * Saves the settings of the Enigma Machine to a file before the application closes.
+     */
     void quit(){
         try {
             PrintStream writer = new PrintStream("settings.txt");
@@ -272,6 +276,11 @@ public class EMInterface {
             System.err.println("Settings file not found.");
         }
     }
+
+    /**
+     * Loads settings from a previous session from a file and uses them to set up the Enigma Machine.
+     * @throws Exception Thrown if there is an error loading the settings.
+     */
     void loadSettings() throws Exception{
         BufferedReader reader = new BufferedReader(new FileReader("settings.txt"));
         reader.mark(1024);
