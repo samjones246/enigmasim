@@ -75,8 +75,44 @@ public class EMInterface {
                     quit();
                     run = false;
                     break;
+                case "6":
+                    bombeTests();
+                    break;
             }
         }
+    }
+
+    /**
+     * The submenu for choosing which bombe challenge to demonstrate
+     */
+    private void bombeTests() {
+        Bombe bombe = new Bombe();
+        clearScreen();
+        System.out.println("---Bombe Challenges---");
+        System.out.println("1 - Challenge 1 : Plug Ends");
+        System.out.println("2 - Challenge 2 : Rotor Positions");
+        System.out.println("3 - Challenge 3 : Rotor Types");
+        System.out.print("> ");
+        String input = userInput();
+        try {
+            System.out.println("Possible Solutions: ");
+            switch (input) {
+                case "1":
+                    bombe.test1();
+                    break;
+                case "2":
+                    bombe.test2();
+                    break;
+                case "3":
+                    bombe.test3();
+                    break;
+            }
+        }catch (Exception e){
+            System.err.println(e);
+            e.printStackTrace();
+        }
+        System.out.println("Press Enter to continue");
+        userInput();
     }
 
     /**
