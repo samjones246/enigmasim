@@ -35,11 +35,11 @@ public class Plugboard {
     }
 
     // Substitute a given character if it matches an end of a plug on the plugboard
-    char substitute(char orignal){
-        char output = orignal;
+    char substitute(char original){
+        char output = original;
         for(Plug plug: plugs){
-            if(plug !=null && plug.hasEnd(orignal)) {
-                output = plug.encode(orignal);
+            if(plug !=null && plug.hasEnd(original)) {
+                output = plug.encode(original);
             }
         }
         return output;

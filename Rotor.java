@@ -10,8 +10,12 @@ public abstract class Rotor {
         return position;
     }
 
-    public void setPosition(int position) {
-        this.position = position;
+    public void setPosition(int position) throws Exception{
+        if (position<ROTORSIZE){
+            this.position = position;
+        }else{
+            throw new Exception("Invalid Rotor Position!");
+        }
     }
 
     public abstract void initialise(String name) throws Exception;

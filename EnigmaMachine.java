@@ -13,8 +13,8 @@ public class EnigmaMachine {
         plugboard = new Plugboard();
     }
 
-    public void addPlug(char end1, char end2){
-        plugboard.addPlug(end1, end2);
+    public boolean addPlug(char end1, char end2){
+        return plugboard.addPlug(end1, end2);
     }
 
     public void clearPlugboard(){
@@ -37,7 +37,7 @@ public class EnigmaMachine {
         return reflector;
     }
 
-    public void setPosition(int slot, int position){
+    public void setPosition(int slot, int position) throws Exception{
         rotors[slot].setPosition(position);
     }
 
